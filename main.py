@@ -15,8 +15,6 @@ class bot_user(discord.Client):
     async def on_ready(self):
         print(f'Now logged in as {self.user}')
     async def on_message(self, message):
-        global bot_config
-        global runtimes
         if message.content.startswith(bot_config.prefix):
             command = message.content[1:].split(' ')
             args = command[1:]
