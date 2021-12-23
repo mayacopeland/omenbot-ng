@@ -32,6 +32,10 @@ class bot_user(discord.Client):
                 await message.channel.send(commands.run_code.run_code(args, runtimes))
             elif command[0] == "inspiration" or command[0] == "inspire" or command[0] == "motivation":
                 await message.channel.send(commands.inspiration.inspire())
+            elif command[0] == "roll":
+                await message.channel.send(commands.roll.roll(message.author, args))
+            elif command[0] == "alert" and sender_allowed_elevated_commands:
+                await message.channel.send(commands.alerts.alert(args))
             elif command[0] == "remind" and sender_allowed_elevated_commands:
                 chan = discord.utils.get(message.guild.channels, name=bot_config.reminder_channel)
                 await message.channel.send(await commands.remind.remind_users(chan, bot_config.reminder_role, args[0], args[1], args[2]))

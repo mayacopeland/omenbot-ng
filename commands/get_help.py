@@ -5,5 +5,10 @@ def send_help():
     - help          displays this message
     - runtimes      shows all the languages omenbot can run
     - run           runs code in a given block (run <language> <code block>) 
-    - inspire       shows a very inspirational message```
+    - inspire       shows a very inspirational message
+    - roll          roll a number
+    
+    Admins:
+    - remind        reminds everyone of coursework due
+    ```
     """
