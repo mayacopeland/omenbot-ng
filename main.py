@@ -20,6 +20,10 @@ class bot_user(discord.Client):
             args = command[1:]
             if command[0] == 'runtimes':
                 await message.channel.send(commands.get_runtimes.get_runtimes_api())
+            elif command[0] == "help":
+                await message.channel.send(commands.get_help.send_help())
+            elif command[0] == "run":
+                await message.channel.send(commands.run_code.run_code(args, runtimes))
             else:
                 print(f'Unhandled command: {command[0]} - args: {args}')
 
