@@ -6,7 +6,7 @@ def run_code(args, runtimes):
         args = args[0].split("\n") + args[1:]
         ticks = True
 
-    if len(args) is 0:
+    if len(args) == 0:
         return "Language cannot be empty"
 
     language = args[0]

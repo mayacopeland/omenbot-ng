@@ -1,4 +1,8 @@
 {
 	"token": "",
-	"prefix": "-"
+	"prefix": "-",
+	"bot_dev_role": "botdev",
+	"admin_role":	"Admin",
+	"reminder_channel_name": "reminders",
+	"reminder_role": "923531801954242622"
 }

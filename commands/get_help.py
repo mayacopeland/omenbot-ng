@@ -3,5 +3,6 @@ def send_help():
     return """
     ```Currently handled commands:
     - help          displays this message
-    - runtimes      shows all the languages omenbot can run```
+    - runtimes      shows all the languages omenbot can run
+    - run           runs code in a given block (run <language> <code block>) ```
     """
