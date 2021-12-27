@@ -36,4 +36,4 @@ def run_code(args: [str], runtimes) -> str:
     }
     piston_request = requests.post('https://emkc.org/api/v2/piston/execute',  json=request_params)
     request_json = piston_request.json()
-    return request_json['run']['output']
+    return request_json['run']['output'] if request_json['run']['output'] != "" else "Input is invalid (was it empty?)"
