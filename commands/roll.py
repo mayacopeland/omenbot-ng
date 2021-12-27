@@ -1,5 +1,5 @@
 import random
-def roll(auth, args):
+def roll(auth: str, args: [str]) -> str:
     max_roll = 100
     if len(args) > 0:
         max_roll = int(args[0])

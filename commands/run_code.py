@@ -1,6 +1,6 @@
 import requests
 
-def run_code(args, runtimes):
+def run_code(args: [str], runtimes) -> str:
     ticks = False
     if len(args) > 0 and '```' in args[0]:
         args = args[0].split("\n") + args[1:]

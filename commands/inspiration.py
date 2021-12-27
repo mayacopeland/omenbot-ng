@@ -1,4 +1,4 @@
 import requests
 
-def inspire():
+def inspire() -> str:
     return requests.get("https://inspirobot.me/api?generate=true").text

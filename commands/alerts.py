@@ -1,4 +1,4 @@
-def alert(args):
+def alert(args) -> str:
     warn = {
         "topic": 'Can you please move this topic elsewhere or stop discussing it?',
         "spam":  'Please stop spamming.',

@@ -1,4 +1,4 @@
-def send_help():
+def send_help() -> str:
     # could maybe categorise it?
     return """
     ```Currently handled commands:
