@@ -22,7 +22,7 @@ def run_code(args: [str], runtimes) -> str:
             if i.name == language:
                 version = i.version
     
-    if "@everyone" in code or "@here" in code:
+    if "@" in code:
         return "No."
 
     
@@ -40,7 +40,7 @@ def run_code(args: [str], runtimes) -> str:
     piston_request = requests.post('https://emkc.org/api/v2/piston/execute',  json=request_params)
     request_json = piston_request.json()
 
-    if "@everyone" in request_json['run']['output'] or "@here" in request_json['run']['output']:
+    if "@" in request_json['run']['output']:
         return 'No.'
 
     return request_json['run']['output'] if request_json['run']['output'] != "" else "Input is invalid (was it empty?)"

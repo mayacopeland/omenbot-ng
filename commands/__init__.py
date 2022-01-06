@@ -5,3 +5,4 @@ from . import remind
 from . import inspiration
 from . import roll
 from . import alerts
+from . import update_presence

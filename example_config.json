@@ -4,5 +4,6 @@
 	"bot_dev_role": "botdev",
 	"admin_role":	"Admin",
 	"reminder_channel_name": "reminders",
-	"reminder_role": ""
+	"reminder_role": "",
+	"playing_status": "with your heart"
 }

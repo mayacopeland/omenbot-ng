@@ -8,17 +8,21 @@ runtimes = None
 client = None
 
 class config:
-    def __init__(self, t, p, bdr, sar, rc, rr):
+    def __init__(self, t, p, bdr, sar, rc, rr, pn):
         self.token = t
         self.prefix = p
         self.bot_dev_role = bdr
         self.server_admin_role = sar
         self.reminder_channel = rc
         self.reminder_role = rr
+        self.presence_name = pn
 
 class bot_user(discord.Client):
     async def on_ready(self):
+        if bot_config.presence_name != '':
+            await self.change_presence(activity=discord.Game(bot_config.presence_name))
         print(f'Now logged in as {self.user}')
+    
     async def on_message(self, message):
         if message.content.startswith(bot_config.prefix):
             command = message.content[1:].split(' ')
@@ -39,6 +43,8 @@ class bot_user(discord.Client):
             elif command[0] == "remind" and sender_allowed_elevated_commands:
                 chan = discord.utils.get(message.guild.channels, name=bot_config.reminder_channel)
                 await message.channel.send(await commands.remind.remind_users(chan, bot_config.reminder_role, args[0], args[1], args[2]))
+            elif command[0] == "update_presence" and sender_allowed_elevated_commands:
+                await commands.update_presence.update_presence(self, " ".join(args))
             else:
                 await message.channel.send("Unknown command.")
                 print(f'Unhandled command: {command[0]} - args: {args}')
@@ -58,12 +64,14 @@ def main():
     print('Parsing Configuration')
     config_file = open('config.json', 'r')
     c = json.load(config_file)
-    bot_config = config(c['token'], c['prefix'], c['bot_dev_role'], c['admin_role'], c['reminder_channel_name'], c['reminder_role'])
+    bot_config = config(c['token'], c['prefix'], c['bot_dev_role'], c['admin_role'], c['reminder_channel_name'], c['reminder_role'], c['playing_status'])
     print('Getting available command runtimes')
     runtimes = util.get_runtimes.create_classes()
     discord_client = bot_user()
     discord_client.run(bot_config.token)
     client = discord_client
+    print(bot_config.presence_name)
+    
 
 if __name__ == "__main__":
     main()
