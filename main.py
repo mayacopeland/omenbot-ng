@@ -34,7 +34,7 @@ class bot_user(discord.Client):
                 await message.channel.send(commands.inspiration.inspire())
             elif command[0] == "roll":
                 await message.channel.send(commands.roll.roll(message.author, args))
-            elif command[0] == "alert" and sender_allowed_elevated_commands:
+            elif command[0] == "warn" and sender_allowed_elevated_commands:
                 await message.channel.send(commands.alerts.alert(args))
             elif command[0] == "remind" and sender_allowed_elevated_commands:
                 chan = discord.utils.get(message.guild.channels, name=bot_config.reminder_channel)

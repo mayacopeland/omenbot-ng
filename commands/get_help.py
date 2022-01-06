@@ -10,5 +10,7 @@ def send_help() -> str:
     
     Admins:
     - remind        reminds everyone of coursework due
+    - warn          warns of current topic <topic/rules/spam>
+    https://github.com/mayacopeland/omenbot-ng
     ```
     """
