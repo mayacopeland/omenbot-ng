@@ -22,7 +22,10 @@ def run_code(args: [str], runtimes) -> str:
             if i.name == language:
                 version = i.version
     
+    if "@everyone" in code:
+        return "No."
 
+    
     if version is None:
         return f"{language} does not exist as a runtime"
 
