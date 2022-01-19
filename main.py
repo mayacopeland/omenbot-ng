@@ -53,6 +53,17 @@ class bot_user(discord.Client):
                 await message.channel.send(await commands.remind.remind_users(chan, bot_config.reminder_role, args[0], args[2], args[4]))
             elif command[0] == "update_presence" and sender_allowed_elevated_commands:
                 await commands.update_presence.update_presence(self, " ".join(args))
+            elif command[0] == "join":
+                if not message.author.voice:
+                    await message.channel.send("You aren't currently in a voice channel dummy")
+                else:
+                    await message.author.voice.channel.connect()
+            elif command[0] == "leave":
+                voice_channel = message.guild.voice_client
+                if voice_channel.is_connected():
+                    await voice_channel.disconnect()
+                else:
+                    await message.channel.send("I'm no't currently in a voice channel dummy")
             elif command[0] == "p":
                 await message.channel.send("Music bot features aren't re-implemented, sorry")
             else:

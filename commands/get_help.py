@@ -7,6 +7,8 @@ def send_help() -> str:
     - run               runs code in a given block (run <language> <code block>) 
     - inspire           shows a very inspirational message
     - roll              roll a number
+    - join              joins the current voice channel
+    - leave             leaves the current voice channel
     
     Admins:
     - remind            reminds everyone of coursework due
