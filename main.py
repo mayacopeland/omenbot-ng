@@ -40,6 +40,7 @@ class bot_user(discord.Client):
                 await message.channel.send(commands.roll.roll(message.author, args))
             elif command[0] == "warn" and sender_allowed_elevated_commands:
                 await message.channel.send(commands.alerts.alert(args))
+                await message.delete()
             elif command[0] == "remind" and sender_allowed_elevated_commands:
                 if '"' in message.content and "'" in message.content:
                     await message.channel.send("Please don't mix both ' and \" I'm fragile.")
