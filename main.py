@@ -53,6 +53,8 @@ class bot_user(discord.Client):
                 await message.channel.send(await commands.remind.remind_users(chan, bot_config.reminder_role, args[0], args[2], args[4]))
             elif command[0] == "update_presence" and sender_allowed_elevated_commands:
                 await commands.update_presence.update_presence(self, " ".join(args))
+            elif command[0] == "p":
+                await message.channel.send("Music bot features aren't re-implemented, sorry")
             else:
                 await message.channel.send("Unknown command.")
                 print(f'Unhandled command: {command[0]} - args: {args}')
