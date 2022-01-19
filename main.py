@@ -41,13 +41,24 @@ class bot_user(discord.Client):
             elif command[0] == "warn" and sender_allowed_elevated_commands:
                 await message.channel.send(commands.alerts.alert(args))
             elif command[0] == "remind" and sender_allowed_elevated_commands:
+                if '"' in message.content and "'" in message.content:
+                    await message.channel.send("Please don't mix both ' and \" I'm fragile.")
+                    return
+
+                if "'" in message.content:
+                    args = message.content[1:].split("'")[1:]
+                else:
+                    args = message.content[1:].split('"')[1:]
                 chan = discord.utils.get(message.guild.channels, name=bot_config.reminder_channel)
-                await message.channel.send(await commands.remind.remind_users(chan, bot_config.reminder_role, args[0], args[1], args[2]))
+                await message.channel.send(await commands.remind.remind_users(chan, bot_config.reminder_role, args[0], args[2], args[4]))
             elif command[0] == "update_presence" and sender_allowed_elevated_commands:
                 await commands.update_presence.update_presence(self, " ".join(args))
             else:
                 await message.channel.send("Unknown command.")
                 print(f'Unhandled command: {command[0]} - args: {args}')
+        
+        if 'owo' in message.content:
+            await message.channel.send('whats this?')
 
 
 
@@ -70,7 +81,6 @@ def main():
     discord_client = bot_user()
     discord_client.run(bot_config.token)
     client = discord_client
-    print(bot_config.presence_name)
     
 
 if __name__ == "__main__":
