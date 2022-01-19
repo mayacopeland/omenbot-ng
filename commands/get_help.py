@@ -9,12 +9,13 @@ def send_help() -> str:
     - roll              roll a number
     - join              joins the current voice channel
     - leave             leaves the current voice channel
-    
+
     Admins:
     - remind            reminds everyone of coursework due
     - warn              warns of current topic <topic/rules/spam>
     - update_presence   update's presence with string given
-
+    - add_bot_reply     adds another dumb reply to people trying to run admin commands 
+    
     Source Code: https://github.com/mayacopeland/omenbot-ng
     [Licensed under Apache 2.0]
     ```

@@ -2,13 +2,14 @@ import discord
 import json
 import commands
 import util
+import random 
 
 bot_config = None
 runtimes = None
 client = None
 
 class config:
-    def __init__(self, t, p, bdr, sar, rc, rr, pn):
+    def __init__(self, t, p, bdr, sar, rc, rr, pn, fr):
         self.token = t
         self.prefix = p
         self.bot_dev_role = bdr
@@ -16,6 +17,7 @@ class config:
         self.reminder_channel = rc
         self.reminder_role = rr
         self.presence_name = pn
+        self.funny_replies = fr
 
 class bot_user(discord.Client):
     async def on_ready(self):
@@ -24,7 +26,7 @@ class bot_user(discord.Client):
         print(f'Now logged in as {self.user}')
     
     async def on_message(self, message):
-        if message.content.startswith(bot_config.prefix):
+        if message.content.startswith(bot_config.prefix) and message.author != self.user:
             command = message.content[1:].split(' ')
             args = command[1:]
             sender_allowed_elevated_commands = bot_config.bot_dev_role.lower() in [r.name.lower() for r in message.author.roles] or bot_config.server_admin_role.lower() in [r.name.lower() for r in message.author.roles]
@@ -53,7 +55,9 @@ class bot_user(discord.Client):
                 chan = discord.utils.get(message.guild.channels, name=bot_config.reminder_channel)
                 await message.channel.send(await commands.remind.remind_users(chan, bot_config.reminder_role, args[0], args[2], args[4]))
             elif command[0] == "update_presence" and sender_allowed_elevated_commands:
-                await commands.update_presence.update_presence(self, " ".join(args))
+                await message.channel.send(await commands.update_presence.update_presence(self, " ".join(args)))
+            elif command[0] == "add_bot_reply" and sender_allowed_elevated_commands:
+                await message.channel.send(await commands.add_bad_reply.update_reply(" ".join(args), bot_config))
             elif command[0] == "join":
                 if not message.author.voice:
                     await message.channel.send("You aren't currently in a voice channel dummy")
@@ -70,11 +74,13 @@ class bot_user(discord.Client):
                     await message.channel.send("I'm not currently in a voice channel dummy")
             elif command[0] == "p":
                 await message.channel.send("Music bot features aren't re-implemented, sorry")
+            elif sender_allowed_elevated_commands != True and command[0] in ['warn', 'remind', 'update_presence', 'add_bot_reply']:
+                await message.channel.send(random.choice(bot_config.funny_replies))
             else:
                 await message.channel.send("Unknown command.")
                 print(f'Unhandled command: {command[0]} - args: {args}')
         
-        if 'owo' in message.content:
+        if 'owo' in message.content.split(' '):
             await message.channel.send('whats this?')
 
 
@@ -92,7 +98,7 @@ def main():
     print('Parsing Configuration')
     config_file = open('config.json', 'r')
     c = json.load(config_file)
-    bot_config = config(c['token'], c['prefix'], c['bot_dev_role'], c['admin_role'], c['reminder_channel_name'], c['reminder_role'], c['playing_status'])
+    bot_config = config(c['token'], c['prefix'], c['bot_dev_role'], c['admin_role'], c['reminder_channel_name'], c['reminder_role'], c['playing_status'], c["funny_replies"])
     print('Getting available command runtimes')
     runtimes = util.get_runtimes.create_classes()
     discord_client = bot_user()

@@ -10,6 +10,6 @@ async def update_presence(client, presence_name):
         config_parsed['playing_status'] = presence_name
         await client.change_presence(activity=discord.Game(presence_name))
         config.write(json.dumps(config_parsed))
-    return 'updated.'
+    return 'updated the client presence'
     
 

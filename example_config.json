@@ -5,5 +5,6 @@
 	"admin_role":	"Admin",
 	"reminder_channel_name": "reminders",
 	"reminder_role": "",
-	"playing_status": "with your heart"
+	"playing_status": "with your heart",
+	"funny_replies": ["nice try", ":pensive:", "you can nyot w-wun this command siwwy wiwwy", "fail", "noooo"]
 }
