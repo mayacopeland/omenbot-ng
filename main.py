@@ -61,10 +61,13 @@ class bot_user(discord.Client):
                     await message.author.voice.channel.connect()
             elif command[0] == "leave":
                 voice_channel = message.guild.voice_client
-                if voice_channel.is_connected():
-                    await voice_channel.disconnect()
-                else:
-                    await message.channel.send("I'm no't currently in a voice channel dummy")
+                try:
+                    if voice_channel.is_connected():
+                        await voice_channel.disconnect()
+                    else:
+                        await message.channel.send("I'm not currently in a voice channel dummy")
+                except:
+                    await message.channel.send("I'm not currently in a voice channel dummy")
             elif command[0] == "p":
                 await message.channel.send("Music bot features aren't re-implemented, sorry")
             else:
