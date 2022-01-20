@@ -28,6 +28,8 @@ class bot_user(discord.Client):
         print(f'Now logged in as {self.user}')
         loop = asyncio.get_event_loop()
         task = loop.create_task(util.coursework_reminder.reminder_loop())
+        self.load_extension("cogs.Suggestions")
+        print("Suggestions cog loaded")
     
     async def on_message(self, message):
         if message.content.startswith(bot_config.prefix) and message.author != self.user:
