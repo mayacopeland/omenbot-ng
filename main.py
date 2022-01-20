@@ -103,7 +103,7 @@ def main():
     bot_config = config(c['token'], c['prefix'], c['bot_dev_role'], c['admin_role'], c['reminder_channel_name'], c['reminder_role'], c['playing_status'], c["funny_replies"])
     print('Getting available command runtimes')
     runtimes = util.get_runtimes.create_classes()
-    discord_client = bot_user()
+    discord_client = bot_user(command_prefix = '-')
     discord_client.run(bot_config.token)
     client = discord_client
     
