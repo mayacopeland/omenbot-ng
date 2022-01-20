@@ -1,6 +1,6 @@
 import requests
 
-def run_code(args: [str], runtimes) -> str:
+def run_code(args: [str], runtimes, random_reply) -> str:
     ticks = False
     if len(args) > 0 and '```' in args[0]:
         args = args[0].split("\n") + args[1:]
@@ -23,7 +23,7 @@ def run_code(args: [str], runtimes) -> str:
                 version = i.version
     
     if "@" in code:
-        return "no u"
+        return random_reply
 
     
     if version is None:
@@ -41,6 +41,6 @@ def run_code(args: [str], runtimes) -> str:
     request_json = piston_request.json()
 
     if "@" in request_json['run']['output']:
-        return 'no u'
+        return random_reply
 
     return request_json['run']['output'] if request_json['run']['output'] != "" else "Input is invalid (was it empty?)"

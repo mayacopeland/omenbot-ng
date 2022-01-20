@@ -38,7 +38,7 @@ class bot_user(discord.Client):
             elif command[0] == "help":
                 await message.channel.send(commands.get_help.send_help())
             elif command[0] == "run":
-                await message.channel.send(commands.run_code.run_code(args, runtimes))
+                await message.channel.send(commands.run_code.run_code(args, runtimes, random.choice(bot_config.funny_replies)))
             elif command[0] == "inspiration" or command[0] == "inspire" or command[0] == "motivation":
                 await message.channel.send(commands.inspiration.inspire())
             elif command[0] == "roll":
