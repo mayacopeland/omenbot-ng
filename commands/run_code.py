@@ -41,6 +41,6 @@ def run_code(args: [str], runtimes) -> str:
     request_json = piston_request.json()
 
     if "@" in request_json['run']['output']:
-        return 'No.'
+        return 'no u'
 
     return request_json['run']['output'] if request_json['run']['output'] != "" else "Input is invalid (was it empty?)"

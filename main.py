@@ -1,8 +1,9 @@
+import asyncio
+import commands
 import discord
 import json
-import commands
-import util
 import random 
+import util
 
 bot_config = None
 runtimes = None
@@ -24,6 +25,8 @@ class bot_user(discord.Client):
         if bot_config.presence_name != '':
             await self.change_presence(activity=discord.Game(bot_config.presence_name))
         print(f'Now logged in as {self.user}')
+        loop = asyncio.get_event_loop()
+        task = loop.create_task(util.coursework_reminder.reminder_loop())
     
     async def on_message(self, message):
         if message.content.startswith(bot_config.prefix) and message.author != self.user:
@@ -82,12 +85,6 @@ class bot_user(discord.Client):
         
         if 'owo' in message.content.split(' '):
             await message.channel.send('whats this?')
-
-
-
-def reminder_loop():
-    print('remind')
-
 
 def main():
     global bot_config
