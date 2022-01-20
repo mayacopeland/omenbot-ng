@@ -85,6 +85,8 @@ class bot_user(discord.Client):
         
         if 'owo' in message.content.split(' '):
             await message.channel.send('whats this?')
+        
+        await client.process_commands(message)
 
 def main():
     global bot_config
