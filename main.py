@@ -4,6 +4,7 @@ import discord
 import json
 import random 
 import util
+from discord.ext import commands
 
 bot_config = None
 runtimes = None
