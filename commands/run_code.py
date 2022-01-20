@@ -23,7 +23,7 @@ def run_code(args: [str], runtimes) -> str:
                 version = i.version
     
     if "@" in code:
-        return "No."
+        return "no u"
 
     
     if version is None:
