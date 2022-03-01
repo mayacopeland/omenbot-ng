@@ -86,7 +86,7 @@ class bot_user(discord.Client):
         if 'owo' in message.content.split(' '):
             await message.channel.send('whats this?')
             
-        if "hopital" in message.content.lower():
+        if "hopital" in message.content.lower().replace('ô', 'o'):
             await message.channel.send("l'ôwôpital uwu")
 
 def main():
